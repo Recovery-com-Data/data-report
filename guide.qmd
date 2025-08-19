@@ -1,0 +1,266 @@
+---
+title: Recovery.com's Data Report Template
+author: 
+  - "Cooper Richason"
+author-info:
+  - "Senior Data Scientist"
+font-paths: "./fonts"
+format:
+  data-report-typst: default
+toc: true
+toc-depth: 2
+published-date: "August 19, 2025"
+version: "1.0"
+report-theme: "ocean"
+publication-info: "Published by Recovery.com"
+---
+
+## Introduction
+
+This document serves as both a demonstration and guide for the Recovery.com Data Report Template, a custom [Typst](https://typst.app/) template designed specifically for creating professional research reports, clinical studies, and business intelligence documents. Built on the [Quarto](https://quarto.org/) publishing framework, this template combines the power of modern document processing with elegant, themed typography and professional layouts.
+
+The template addresses common challenges in report creation including consistent branding, document lifecycle management, multi-author collaboration, and professional presentation standards. Whether you're creating quarterly business reports, clinical research studies, or data analysis summaries, this template provides a robust foundation for high-quality document production.
+
+{{< pagebreak >}}
+
+### Why Quarto and Typst?
+
+**Quarto** is a next-generation scientific publishing system that enables reproducible research by combining code, data, and narrative text into cohesive documents. Unlike traditional word processors, Quarto supports:
+
+-   **Reproducible analysis** - Code and results stay synchronized
+-   **Multiple output formats** - PDF, HTML, Word, and more from a single source
+-   **Cross-references** - Automatic figure and table numbering
+-   **Citations and bibliographies** - Seamless integration with reference managers
+-   **Multi-language support** - R, Python, Julia, and Observable JavaScript
+
+**Typst** is a modern typesetting system that offers significant advantages over LaTeX:
+
+-   **Faster compilation** - Near-instantaneous document generation
+-   **Intuitive syntax** - More readable and maintainable than LaTeX
+-   **Better error messages** - Clear diagnostics when issues occur
+-   **Modern features** - Built-in support for modern typography and layouts
+
+{{< pagebreak >}}
+
+## Template Features
+
+### Report Themes
+
+::: {#fig-themes layout-ncol="2"}
+!["forest"](assets/guide/forest.png){width="45%"}
+
+!["ocean"](assets/guide/ocean.png){width="45%"}
+
+!["sunset"](assets/guide/sunset.png){width="45%"}
+
+!["monochrome"](assets/guide/monochrome.png){width="45%"}
+:::
+
+This template supports four different color themes, based on Recovery.com branding. These were designed to allow us to have variance in the look of our report, while keeping a professional look. More themes could be added easily as well.
+
+For example, set the `report-theme` parameter to "forest" to use the forest green theme.
+
+```yaml
+report-theme: "forest"
+```
+
+### Document Lifecycle Management
+
+The template has some document parameters to make it easier to keep track of different versions of reports
+
+**Status Watermarks** - Diagonal watermarks appear on content pages (not title page) - Common values: `DRAFT`, `REVIEW`, `CONFIDENTIAL`, `PRELIMINARY` - Automatically excluded for final documents
+
+![](assets/guide/watermark.png){width="30%"}
+
+**Version Control** - **Editions**: Major revisions (`"First Edition"`, `"Q3 2025 Report"`) - **Versions**: Minor updates (`"1.0"`, `"1.2"`, `"2.1"`) - Smart display: Editions on title page, versions in headers
+
+### Typography and Layout
+
+The template uses professional typography with carefully selected font families:
+
+-   **Body text**: Avenir (clean, readable sans-serif)
+-   **Headings**: Avenir with strategic weight variations
+-   **Display text**: Fields Variable (elegant serif for titles)
+-   **Responsive sizing**: Scales appropriately for different content types
+
+{{< pagebreak >}}
+
+## Using the Template
+
+### Basic Setup
+
+1.  **Install Dependencies**
+
+    ``` bash
+    # Install Quarto
+    # Visit https://quarto.org/docs/get-started/
+
+    # Install Typst
+    quarto install typst
+    ```
+
+2.  **Document Structure**
+
+    ```         
+    project/
+    ├── _extension.yml          # Template configuration
+    ├── fonts/                  # Brand Fonts
+    ├── assets/                 # Images and other assets
+    ├── guide.pdf               # PDF version of guide
+    ├── guide.qmd               # Quarto version to show code
+    └── report.qmd              # Your content
+    ```
+
+3.  **YAML Front Matter**
+
+    ``` yaml
+    ---
+    title: "Your Report Title"
+    author: 
+      - "First Author"
+      - "Second Author"
+    author-info:
+      - "Senior Researcher"
+      - "Data Analyst"
+    format:
+      data-report-typst: default
+    report-theme: "ocean"
+    edition: "First Edition"
+    version: "1.0"
+    published-date: "August 2025"
+    toc: true
+    ---
+    ```
+
+### Advanced Configuration
+
+**Multiple Authors**
+
+``` yaml
+author: 
+  - "Dr. Sarah Johnson"
+  - "Michael Chen"
+  - "Prof. Elena Rodriguez"
+author-info:
+  - "Chief Research Officer"
+  - "Senior Data Scientist"
+  - "Statistical Consultant"
+```
+
+**Document Status**
+
+``` yaml
+# For draft documents
+status: "DRAFT"           # Creates watermark
+
+# For final documents
+# status: none            # No watermark
+```
+
+**Hero Images**
+
+``` yaml
+hero-image:
+  path: "images/hero.png"
+  caption: "Research methodology overview"
+```
+
+**Custom Publication Info**
+
+``` yaml
+publication-info: "Published by Recovery.com Research Institute"
+```
+
+{{< pagebreak >}}
+
+## Content Features
+
+### Figure Management
+
+``` markdown
+::: {layout-ncol=2}
+![Chart A](chart_a.png){#fig-chart-a}
+![Chart B](chart_b.png){#fig-chart-b}
+:::
+```
+
+### Cross-References
+
+``` markdown
+As shown in @fig-chart-a, the trend indicates...
+See @tbl-summary for detailed statistics.
+```
+
+### Citations
+
+``` markdown
+According to recent research [@smith2024], the findings suggest...
+```
+
+### Custom Blocks
+
+``` markdown
+::: {.callout-note}
+This is an important note that will be highlighted.
+:::
+```
+
+{{< pagebreak >}}
+
+## Compilation and Output
+
+### Rendering Documents
+
+``` bash
+# Basic rendering
+quarto render report.qmd
+
+# Specify output location
+quarto render report.qmd --output-dir ./output
+
+# Watch for changes during development
+quarto preview report.qmd
+```
+
+## Troubleshooting
+
+### Common Issues
+
+**Compilation Errors** - Check YAML syntax for proper indentation - Verify font paths are correct - Ensure image files exist at specified paths
+
+**Typst-Specific Problems** - Array operations use `+` for concatenation, not `push()` - Color values must be properly formatted RGB - Layout functions require proper context blocks
+
+**Quarto Integration** - Verify template files are in correct locations - Check `_extension.yml` configuration - Ensure Quarto and Typst versions are compatible
+
+### Getting Help
+
+-   **Quarto Documentation**: [quarto.org/docs](https://quarto.org/docs)
+-   **Typst Documentation**: [typst.app/docs](https://typst.app/docs)
+-   **Template Issues**: Contact the development team
+
+{{< pagebreak >}}
+
+## Future Enhancements
+
+Planned improvements to the template system include:
+
+-   **Additional themes** - Industry-specific color schemes
+-   **Enhanced layouts** - Multi-column options, sidebar content
+-   **Interactive elements** - Web-based output features
+-   **Integration tools** - Direct connection to data sources
+-   **Accessibility features** - Screen reader optimization, high contrast modes
+
+{{< pagebreak >}}
+
+## Conclusion
+
+The Recovery.com Data Report Template represents a significant advancement in document creation capabilities, combining the analytical power of Quarto with the elegant typography of Typst. By providing a consistent, professional framework for report generation, this template enables teams to focus on content creation rather than formatting concerns.
+
+Whether you're producing clinical research studies, quarterly business reports, or data analysis summaries, this template provides the foundation for professional, reproducible, and visually appealing documents that meet the highest standards of scientific and business communication.
+
+The template's flexibility, combined with Quarto's powerful features and Typst's modern typesetting capabilities, creates a robust platform for all your organizational reporting needs. As you begin using this system, remember that the template is designed to grow with your requirements, supporting everything from simple status reports to complex multi-chapter research publications.
+
+
+------------------------------------------------------------------------
+
+*This document was generated using the Recovery.com's Data Report Template v1.0, demonstrating the capabilities described throughout this guide.*

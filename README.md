@@ -12,4 +12,4 @@ that you can use as a starting place for your document.
 
 ## Example
 
-![Template](assets/template.png)
+![Template](assets/guide/template.png)
